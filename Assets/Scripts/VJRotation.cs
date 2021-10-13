@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class VJRotation : MonoBehaviour
+public class VJRotation : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public void OnDrag(PointerEventData ped)
     {
