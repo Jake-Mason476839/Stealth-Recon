@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 0.05f;
+    public float moveSpeed;
     public VJMovement jsMovement;
     public VJRotation jsRotation;
     private Vector3 direction;
-    private float xMin, xMax, yMin, yMax;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        xMax = Screen.width - 0.5f;
-        xMin = 0.5f;
-        yMax = Screen.height - 0.5f;
-        yMin = 0.5f;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         direction = jsMovement.InputDirection;
 
         if (direction.magnitude != 0)
         {
-            transform.position += direction * moveSpeed;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), Mathf.Clamp(transform.position.y, yMin, yMax), 0f);
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("vertical");
+            float moveBy = x * moveSpeed;
+            float move = y * moveSpeed;
+            rb.velocity = new Vector3(moveBy, move, rb.velocity.z);
         }
     }
 }
