@@ -8,13 +8,13 @@ public class VJRotation : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 {
     private Image joystickBackground;
     private Image joystick;
-    public Vector3 InputDirection;
+    public Vector3 inputDirection;
 
     void Start()
     {
         joystickBackground = GetComponent<Image>();
         joystick = transform.GetChild(0).GetComponent<Image>();
-        InputDirection = Vector3.zero;
+        inputDirection = Vector3.zero;
     }
 
     public void OnDrag(PointerEventData ped)
@@ -29,10 +29,10 @@ public class VJRotation : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
         float x = (joystickBackground.rectTransform.pivot.x == 1f) ? position.x * 2 + 1 : position.x * 2 - 1;
         float y = (joystickBackground.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
 
-        InputDirection = new Vector3(x, y, 0);
-        InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
+        inputDirection = new Vector3(x, y, 0);
+        inputDirection = (inputDirection.magnitude > 1) ? inputDirection.normalized : inputDirection;
 
-        joystick.rectTransform.anchoredPosition = new Vector3(InputDirection.x * (joystickBackground.rectTransform.sizeDelta.x / 3), InputDirection.y * (joystickBackground.rectTransform.sizeDelta.y / 3));
+        joystick.rectTransform.anchoredPosition = new Vector3(inputDirection.x * (joystickBackground.rectTransform.sizeDelta.x / 3), inputDirection.y * (joystickBackground.rectTransform.sizeDelta.y / 3));
     }
 
     public void OnPointerDown(PointerEventData ped)
@@ -42,7 +42,7 @@ public class VJRotation : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
     public void OnPointerUp(PointerEventData ped)
     {
-        InputDirection = Vector3.zero;
+        inputDirection = Vector3.zero;
         joystick.rectTransform.anchoredPosition = Vector3.zero;
     }
 }
