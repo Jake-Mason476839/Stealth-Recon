@@ -1,67 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FieldOfView : MonoBehaviour
 {
-    public float radius;
-    [Range(0, 360)]
-    public float angle;
-    public GameObject player;
-    public LayerMask targetMask;
-    public LayerMask obstructionMask;
-    public bool canSeePlayer;
+    public float rotationSpeed;
+    public float distance;
+    public LineRenderer lineofsight;
 
-    private void Start()
+    void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        Physics2D.queriesStartInColliders = false;
     }
 
-    private IEnumerator FOVRoutine()
+    void Update()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
 
-        while(true)
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance);
+        if(hitInfo.collider != null)
         {
-            yield return wait;
-            FieldOfViewCheck();
-        }
-    }
+            Debug.DrawLine(transform.position, hitInfo.point, Color.red);
+            lineofsight.SetPosition(1, hitInfo.point);
 
-    private void FieldOfViewCheck()
-    {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
-
-        if(rangeChecks.Length != 0)
-        {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-            if(Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            if(hitInfo.collider.CompareTag("Player"))
             {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-                if(!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
-                {
-                    canSeePlayer = true;
-                }
-
-                else
-                {
-                    canSeePlayer = false;
-                }
-            }
-
-            else
-            {
-                canSeePlayer = false;
+                Destroy(hitInfo.collider.gameObject);
             }
         }
-
-        else if (canSeePlayer)
+        else
         {
-            canSeePlayer = false;
+            Debug.DrawLine(transform.position, transform.position + transform.up * distance, Color.green);
+            lineofsight.SetPosition(1, transform.position + transform.up * distance);
         }
+        lineofsight.SetPosition(0, transform.position);
     }
 }

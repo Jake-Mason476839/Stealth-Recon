@@ -15,9 +15,27 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    void Awake()
+    {
+        Destroy(bullet, 3.0f);
+    }
+
     void FixedUpdate()
     {
         rb.AddForce(transform.up * bulletSpeed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "obstruction")
+        {
+            Destroy(bullet);
+        }
+
+        if (collision.tag == "enemy")
+        {
+            Destroy(bullet);
+        }
     }
  
     public void Shoot()

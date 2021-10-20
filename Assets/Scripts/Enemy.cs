@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject enemy;
+    public GameObject spawn;
+    public GameObject deadEnemy;
+    private GameObject deadEnemyInstance;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == "bullet")
+        {
+            Destroy(enemy);
+
+            float instX = spawn.transform.position.x;
+            float instY = spawn.transform.position.y;
+            deadEnemyInstance = Instantiate(deadEnemy, new Vector3(instX, instY, 0), transform.rotation);
+        }
     }
 }
