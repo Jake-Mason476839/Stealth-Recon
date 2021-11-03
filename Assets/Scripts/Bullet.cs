@@ -37,6 +37,11 @@ public class Bullet : MonoBehaviour
             Destroy(bullet);
         }
     }
+
+    public void OnPointerDown()
+    {
+        shoot();
+    }
  
     public void Shoot()
     {

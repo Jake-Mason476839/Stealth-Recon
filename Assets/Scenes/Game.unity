@@ -1267,9 +1267,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.065945625, y: 1.4588803}
+  m_Offset: {x: -0.010501862, y: 0.21139884}
   serializedVersion: 2
-  m_Radius: 2.9548693
+  m_Radius: 2.206379
 --- !u!1 &266732287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,7 +2285,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2316,8 +2316,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.022346497
+        value: 0.36478043
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2329,7 +2329,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.9433962, g: 0.11124954, b: 0.11124954, a: 1}
       key1: {r: 0.9433962, g: 0.11124954, b: 0.11124954, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -2899,6 +2899,7 @@ GameObject:
   - component: {fileID: 1280526309}
   - component: {fileID: 1280526308}
   - component: {fileID: 1280526307}
+  - component: {fileID: 1280526310}
   m_Layer: 5
   m_Name: Shoot Button
   m_TagString: Untagged
@@ -3019,6 +3020,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280526305}
   m_CullTransparentMesh: 1
+--- !u!114 &1280526310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280526305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 205925495}
+          m_TargetAssemblyTypeName: Bullet, Assembly-CSharp
+          m_MethodName: Shoot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1308657184
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,8 +4167,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3946645456096252266, guid: 35896ae30c2b26f47803c5e6f2f91672, type: 3}
     - target: {fileID: 8848061071949264922, guid: cd7cde221e339cb499dfbfb9ec47c202, type: 3}
+      propertyPath: m_Size.y
+      value: 4.8931465
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848061071949264922, guid: cd7cde221e339cb499dfbfb9ec47c202, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848061071949264922, guid: cd7cde221e339cb499dfbfb9ec47c202, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.59962654
       objectReference: {fileID: 0}
     - target: {fileID: 8848061071949264923, guid: cd7cde221e339cb499dfbfb9ec47c202, type: 3}
       propertyPath: m_RootOrder
@@ -4190,7 +4228,7 @@ PrefabInstance:
       objectReference: {fileID: 243814336}
     - target: {fileID: 8848061071949264925, guid: cd7cde221e339cb499dfbfb9ec47c202, type: 3}
       propertyPath: distance
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8848061071949264925, guid: cd7cde221e339cb499dfbfb9ec47c202, type: 3}
       propertyPath: m_Enabled
