@@ -12,8 +12,8 @@ public class VJMovement : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
     void Start()
     {
-        joystickBackground = GetComponent<Image>();
-        joystick = transform.GetChild(0).GetComponent<Image>();
+        joystickBackground = GetComponent<Image>(); //This gets the background image of the joystick
+        joystick = transform.GetChild(0).GetComponent<Image>(); 
         inputDirection = Vector3.zero;
     }
 
@@ -23,8 +23,8 @@ public class VJMovement : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(joystickBackground.rectTransform, ped.position, ped.pressEventCamera, out position);
 
-        position.x = (position.x / joystickBackground.rectTransform.sizeDelta.x);
-        position.y = (position.y / joystickBackground.rectTransform.sizeDelta.y);
+        position.x = (position.x / joystickBackground.rectTransform.sizeDelta.x); //These two lines get the starting position of the joystick on the joysticks background.
+        position.y = (position.y / joystickBackground.rectTransform.sizeDelta.y); 
 
         float x = (joystickBackground.rectTransform.pivot.x == 1f) ? position.x * 2 + 1 : position.x * 2 - 1;
         float y = (joystickBackground.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
@@ -37,12 +37,13 @@ public class VJMovement : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
     public void OnPointerDown(PointerEventData ped)
     {
-        OnDrag(ped);
+        OnDrag(ped); //This line detects when the user is dragging the joystick around.
     }
 
     public void OnPointerUp(PointerEventData ped)
     {
         inputDirection = Vector3.zero;
         joystick.rectTransform.anchoredPosition = Vector3.zero;
+        //The use of this code is to return the joystick to its orignal starting position after the user has let go of the joystick.
     }
 }
